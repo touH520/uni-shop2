@@ -23,7 +23,7 @@ $http.afterRequest = function() {
   uni.hideLoading()
 }
 
-//封装并挂载一个自定义函数
+//封装并挂载一个自定义函数----showMsg(提示框)
 uni.$showMsg = function(title = '数据加载失败！', duration = 1500) {
   uni.showToast({
     title,
@@ -31,6 +31,24 @@ uni.$showMsg = function(title = '数据加载失败！', duration = 1500) {
     icon: 'none'
   })
 }
+
+//封装并挂载一个自定义函数----showModal(确认框)
+uni.$showConfirm = function(title = '提示', content = '你确定执行该操作吗',successCallback = function() {}) {
+  uni.showModal({
+    title,
+    content,
+    success:function(res) {
+      if (res.confirm) {
+        uni.$showMsg('确认');
+        //注意，此处传入的回调函数需定义为箭头函数
+        successCallback()
+      } else if(res.cancel) {
+        uni.$showMsg('取消')
+      }
+    }
+  });
+}
+
 
 Vue.config.productionTip = false
 

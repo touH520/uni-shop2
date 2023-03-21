@@ -32,7 +32,7 @@ _requestMiniprogram.$http.afterRequest = function () {
   uni.hideLoading();
 };
 
-//封装并挂载一个自定义函数
+//封装并挂载一个自定义函数----showMsg(提示框)
 uni.$showMsg = function () {var title = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '数据加载失败！';var duration = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1500;
   uni.showToast({
     title: title,
@@ -40,6 +40,24 @@ uni.$showMsg = function () {var title = arguments.length > 0 && arguments[0] !==
     icon: 'none' });
 
 };
+
+//封装并挂载一个自定义函数----showModal(确认框)
+uni.$showConfirm = function () {var title = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '提示';var content = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '你确定执行该操作吗';var successCallback = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function () {};
+  uni.showModal({
+    title: title,
+    content: content,
+    success: function success(res) {
+      if (res.confirm) {
+        uni.$showMsg('确认');
+        //注意，此处传入的回调函数需定义为箭头函数
+        successCallback();
+      } else if (res.cancel) {
+        uni.$showMsg('取消');
+      }
+    } });
+
+};
+
 
 _vue.default.config.productionTip = false;
 
