@@ -38,7 +38,7 @@ swiper image {
   display: flex;
   -webkit-justify-content: space-around;
           justify-content: space-around;
-  margin: 30rpx 0;
+  margin: 15px 0;
 }
 .nav-list .nav-img {
   width: 128rpx;

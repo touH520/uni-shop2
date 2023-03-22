@@ -46,6 +46,7 @@
         "setting" : {
             "urlCheck" : true,
             "es6" : true
-        }
+        },
+        "requiredPrivateInfos": ["getLocation", "chooseLocation", "chooseAddress"]
     }
 }
